@@ -41,15 +41,23 @@ no permission needed. Embeds (YouTube `nocookie` or direct HLS/WebRTC feeds
 via MediaMTX) only switch on with the cam operator's consent, which the
 registry records per cam.
 
+## Status
+
+v1 works end to end: 23 seeded Bali spots + 21 cams, hourly Open-Meteo +
+BMKG ingest into snapshots, BMKG port tides, per-hour/per-day surf scores
+with a daily best-spot pick, optional LLM-written report + confidence per
+spot (any OpenAI-compatible endpoint, off by default), and public pages —
+`/spots`, `/spot?spot=…`, `/cams` — plus a Guest JSON API
+(`opensurf.api.spots|forecast|best|cams`). No auth, no tracking, no cookies.
+
 ## Roadmap sketch
 
-1. `Surf Spot` + `Surf Cam` DocTypes, seed data for ~20 Bali breaks
-2. Scheduled ingest: Open-Meteo marine+wind, BMKG maritime forecast
-3. Tide prediction for each spot
-4. Per-spot hourly surf score (swell direction/size/period vs. spot envelope,
-   offshore wind, tide window) → daily best-spot pick
-5. Public web pages: spot map, spot forecast, cam directory — no auth
-6. Later: community spot reports, own cams at partner locations
+- Cam operator outreach → flip consenting cams from `link` to
+  `embed_youtube`/`embed_direct`
+- Community spot reports (needs a fresh privacy decision — see ADR-004)
+- Own/partner cams via MediaMTX (RTSP in → HLS/WHEP out)
+- Forecast calibration against cam observations; GEBCO bathymetry for
+  swell→breaking-height correction
 
 ## Installation
 

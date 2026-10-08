@@ -1,0 +1,233 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "field:spot_name",
+	"creation": "2026-10-08 00:00:00.000000",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"spot_name",
+		"slug",
+		"is_active",
+		"location_section",
+		"region",
+		"latitude",
+		"longitude",
+		"forecast_timezone",
+		"bmkg_area_code",
+		"bmkg_port_code",
+		"character_section",
+		"break_type",
+		"wave_direction",
+		"bottom",
+		"experience_level",
+		"typical_crowd",
+		"description",
+		"hazards",
+		"conditions_section",
+		"ideal_swell_dir_min",
+		"ideal_swell_dir_max",
+		"ideal_swell_height_min",
+		"ideal_swell_height_max",
+		"ideal_swell_period_min",
+		"offshore_wind_dir_min",
+		"offshore_wind_dir_max",
+		"tide_preference"
+	],
+	"fields": [
+		{
+			"fieldname": "spot_name",
+			"fieldtype": "Data",
+			"in_list_view": 1,
+			"label": "Spot Name",
+			"reqd": 1,
+			"unique": 1
+		},
+		{
+			"fieldname": "slug",
+			"fieldtype": "Data",
+			"label": "Slug",
+			"read_only": 1,
+			"unique": 1
+		},
+		{
+			"default": "1",
+			"fieldname": "is_active",
+			"fieldtype": "Check",
+			"in_standard_filter": 1,
+			"label": "Active"
+		},
+		{
+			"fieldname": "location_section",
+			"fieldtype": "Section Break",
+			"label": "Location"
+		},
+		{
+			"fieldname": "region",
+			"fieldtype": "Select",
+			"in_list_view": 1,
+			"in_standard_filter": 1,
+			"label": "Region",
+			"options": "Bukit Peninsula\nKuta and Legian\nCanggu\nWest Coast\nEast Coast\nNusa Islands\nNorth Bali",
+			"reqd": 1
+		},
+		{
+			"fieldname": "latitude",
+			"fieldtype": "Float",
+			"label": "Latitude",
+			"reqd": 1
+		},
+		{
+			"fieldname": "longitude",
+			"fieldtype": "Float",
+			"label": "Longitude",
+			"reqd": 1
+		},
+		{
+			"default": "Asia/Makassar",
+			"description": "IANA timezone the hourly forecast is stored in. Bali is WITA (Asia/Makassar, UTC+8).",
+			"fieldname": "forecast_timezone",
+			"fieldtype": "Data",
+			"label": "Forecast Timezone",
+			"reqd": 1
+		},
+		{
+			"description": "BMKG perairan (waters) area code covering this spot, e.g. P.P.04 for south Bali waters. From maritim.bmkg.go.id meta.",
+			"fieldname": "bmkg_area_code",
+			"fieldtype": "Data",
+			"label": "BMKG Area Code"
+		},
+		{
+			"description": "BMKG pelabuhan (port) code whose hourly tide forecast applies to this spot, e.g. XP005 Benoa. Nearest reasonable port per coast.",
+			"fieldname": "bmkg_port_code",
+			"fieldtype": "Data",
+			"label": "BMKG Port Code"
+		},
+		{
+			"fieldname": "character_section",
+			"fieldtype": "Section Break",
+			"label": "Character"
+		},
+		{
+			"fieldname": "break_type",
+			"fieldtype": "Select",
+			"in_list_view": 1,
+			"label": "Break Type",
+			"options": "Reef\nBeach\nPoint\nReef and Beach"
+		},
+		{
+			"fieldname": "wave_direction",
+			"fieldtype": "Select",
+			"label": "Wave Direction",
+			"options": "Left\nRight\nLeft and Right"
+		},
+		{
+			"fieldname": "bottom",
+			"fieldtype": "Select",
+			"label": "Bottom",
+			"options": "Coral reef\nRock\nSand\nMixed"
+		},
+		{
+			"fieldname": "experience_level",
+			"fieldtype": "Select",
+			"in_standard_filter": 1,
+			"label": "Experience Level",
+			"options": "Beginner\nIntermediate\nAdvanced\nExpert"
+		},
+		{
+			"fieldname": "typical_crowd",
+			"fieldtype": "Select",
+			"label": "Typical Crowd",
+			"options": "Low\nMedium\nHigh\nVery high"
+		},
+		{
+			"fieldname": "description",
+			"fieldtype": "Small Text",
+			"label": "Description"
+		},
+		{
+			"fieldname": "hazards",
+			"fieldtype": "Small Text",
+			"label": "Hazards"
+		},
+		{
+			"fieldname": "conditions_section",
+			"fieldtype": "Section Break",
+			"label": "Ideal Conditions (scoring envelope)"
+		},
+		{
+			"description": "Degrees 0-360, direction the swell comes FROM. For ranges wrapping north use e.g. 340-20.",
+			"fieldname": "ideal_swell_dir_min",
+			"fieldtype": "Float",
+			"label": "Ideal Swell Direction Min (deg)"
+		},
+		{
+			"fieldname": "ideal_swell_dir_max",
+			"fieldtype": "Float",
+			"label": "Ideal Swell Direction Max (deg)"
+		},
+		{
+			"fieldname": "ideal_swell_height_min",
+			"fieldtype": "Float",
+			"label": "Ideal Swell Height Min (m)"
+		},
+		{
+			"fieldname": "ideal_swell_height_max",
+			"fieldtype": "Float",
+			"label": "Ideal Swell Height Max (m)"
+		},
+		{
+			"description": "Seconds. Longer period than this still scores well; shorter decays.",
+			"fieldname": "ideal_swell_period_min",
+			"fieldtype": "Float",
+			"label": "Ideal Swell Period Min (s)"
+		},
+		{
+			"description": "Degrees 0-360 wind FROM-direction band that is offshore here.",
+			"fieldname": "offshore_wind_dir_min",
+			"fieldtype": "Float",
+			"label": "Offshore Wind Dir Min (deg)"
+		},
+		{
+			"fieldname": "offshore_wind_dir_max",
+			"fieldtype": "Float",
+			"label": "Offshore Wind Dir Max (deg)"
+		},
+		{
+			"fieldname": "tide_preference",
+			"fieldtype": "Select",
+			"label": "Tide Preference",
+			"options": "Any\nLow\nMid\nHigh\nLow to Mid\nMid to High\nIncoming\nOutgoing"
+		}
+	],
+	"index_web_pages_for_search": 0,
+	"links": [],
+	"modified": "2026-10-08 00:00:00.000000",
+	"modified_by": "Administrator",
+	"module": "Open Surf Software",
+	"name": "Surf Spot",
+	"naming_rule": "By fieldname",
+	"owner": "Administrator",
+	"permissions": [
+		{
+			"create": 1,
+			"delete": 1,
+			"email": 1,
+			"export": 1,
+			"print": 1,
+			"read": 1,
+			"report": 1,
+			"role": "System Manager",
+			"share": 1,
+			"write": 1
+		},
+		{
+			"read": 1,
+			"role": "Guest"
+		}
+	],
+	"sort_field": "modified",
+	"sort_order": "DESC",
+	"states": [],
+	"track_changes": 1
+}

@@ -28,6 +28,12 @@ plus owner decisions the same day (open source, free forever, link-first cams).
   + score + tide curve, cam list.
 - [F9] Public web UI: spot map, per-spot forecast page (charts + score +
   tide), cam directory page. Map via OpenStreetMap tiles.
+- [F10] Optional LLM-written daily surf report per spot (2–4 sentences,
+  plain language) plus a forecast-confidence rating comparing the two
+  sources — via any OpenAI-compatible endpoint, configured per site.
+  Absent config → absent feature, never an error.
+
+Status v1 (2026-10-08): F1–F10 implemented and verified on a dev site.
 
 ## Non-functional
 

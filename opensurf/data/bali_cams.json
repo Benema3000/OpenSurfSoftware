@@ -1,0 +1,170 @@
+[
+	{
+		"cam_name": "Uluwatu - The Peak",
+		"spot": "Uluwatu",
+		"provider": "The Bali Eye",
+		"stream_type": "Link",
+		"consent": "Link Only",
+		"url": "https://www.thebalieye.com/camera/uluwatu-peak"
+	},
+	{
+		"cam_name": "Uluwatu - Racetrack",
+		"spot": "Uluwatu",
+		"provider": "The Bali Eye",
+		"stream_type": "Link",
+		"consent": "Link Only",
+		"url": "https://www.thebalieye.com/live-cameras-bali"
+	},
+	{
+		"cam_name": "Impossibles",
+		"spot": "Impossibles",
+		"provider": "The Bali Eye",
+		"stream_type": "Link",
+		"consent": "Link Only",
+		"url": "https://www.thebalieye.com/live-cameras-bali"
+	},
+	{
+		"cam_name": "Padang Padang",
+		"spot": "Padang Padang",
+		"provider": "The Bali Eye",
+		"stream_type": "Link",
+		"consent": "Link Only",
+		"url": "https://www.thebalieye.com/live-cameras-bali"
+	},
+	{
+		"cam_name": "Dreamland",
+		"spot": "Dreamland",
+		"provider": "The Bali Eye",
+		"stream_type": "Link",
+		"consent": "Link Only",
+		"url": "https://www.thebalieye.com/live-cameras-bali"
+	},
+	{
+		"cam_name": "Balangan",
+		"spot": "Balangan",
+		"provider": "The Bali Eye",
+		"stream_type": "Link",
+		"consent": "Link Only",
+		"url": "https://www.thebalieye.com/live-cameras-bali"
+	},
+	{
+		"cam_name": "Kuta Beach",
+		"spot": "Kuta Beach",
+		"provider": "The Bali Eye",
+		"stream_type": "Link",
+		"consent": "Link Only",
+		"url": "https://www.thebalieye.com/live-cameras-bali"
+	},
+	{
+		"cam_name": "Kuta Beach - Balicams",
+		"spot": "Kuta Beach",
+		"provider": "Balicams",
+		"stream_type": "Link",
+		"consent": "Link Only",
+		"url": "https://balicams.com/camera/kuta"
+	},
+	{
+		"cam_name": "Nelayan - Canggu",
+		"spot": "Batu Bolong",
+		"provider": "The Bali Eye",
+		"stream_type": "Link",
+		"consent": "Link Only",
+		"url": "https://www.thebalieye.com/camera/nelayan"
+	},
+	{
+		"cam_name": "Batu Bolong - Canggu",
+		"spot": "Batu Bolong",
+		"provider": "The Bali Eye",
+		"stream_type": "Link",
+		"consent": "Link Only",
+		"url": "https://www.thebalieye.com/live-cameras-bali"
+	},
+	{
+		"cam_name": "Berawa - Canggu",
+		"spot": "Berawa",
+		"provider": "The Bali Eye",
+		"stream_type": "Link",
+		"consent": "Link Only",
+		"url": "https://www.thebalieye.com/live-cameras-bali"
+	},
+	{
+		"cam_name": "Pererenan",
+		"spot": "Pererenan",
+		"provider": "The Bali Eye",
+		"stream_type": "Link",
+		"consent": "Link Only",
+		"url": "https://www.thebalieye.com/live-cameras-bali"
+	},
+	{
+		"cam_name": "Bingin",
+		"spot": "Bingin",
+		"provider": "Balicams",
+		"stream_type": "Link",
+		"consent": "Link Only",
+		"url": "https://balicams.com/"
+	},
+	{
+		"cam_name": "Keramas",
+		"spot": "Keramas",
+		"provider": "The Bali Eye",
+		"stream_type": "Link",
+		"consent": "Link Only",
+		"url": "https://www.thebalieye.com/live-cameras-bali"
+	},
+	{
+		"cam_name": "Nusa Dua",
+		"spot": "Nusa Dua",
+		"provider": "The Bali Eye",
+		"stream_type": "Link",
+		"consent": "Link Only",
+		"url": "https://www.thebalieye.com/live-cameras-bali"
+	},
+	{
+		"cam_name": "Nusa Lembongan - Shipwrecks",
+		"spot": "Shipwrecks",
+		"provider": "The Bali Eye",
+		"stream_type": "Link",
+		"consent": "Link Only",
+		"url": "https://www.thebalieye.com/live-cameras-bali"
+	},
+	{
+		"cam_name": "Medewi",
+		"spot": "Medewi",
+		"provider": "The Bali Eye",
+		"stream_type": "Link",
+		"consent": "Link Only",
+		"url": "https://www.thebalieye.com/live-cameras-bali"
+	},
+	{
+		"cam_name": "Balian Beach",
+		"spot": "Balian",
+		"provider": "The Bali Eye",
+		"stream_type": "Link",
+		"consent": "Link Only",
+		"url": "https://www.thebalieye.com/live-cameras-bali"
+	},
+	{
+		"cam_name": "Kedungu Beach",
+		"spot": "Kedungu",
+		"provider": "The Bali Eye",
+		"stream_type": "Link",
+		"consent": "Link Only",
+		"url": "https://www.thebalieye.com/live-cameras-bali"
+	},
+	{
+		"cam_name": "Balibelly - Kuta",
+		"spot": "Kuta Beach",
+		"provider": "Balibelly",
+		"stream_type": "Link",
+		"consent": "Link Only",
+		"url": "https://balibelly.webflow.io/cams/kuta-beach"
+	},
+	{
+		"cam_name": "Balibelly - Echo Beach",
+		"spot": "Echo Beach",
+		"provider": "Balibelly",
+		"stream_type": "Link",
+		"consent": "Link Only",
+		"url": "https://balibelly.webflow.io/cams/echo-beach"
+	}
+]

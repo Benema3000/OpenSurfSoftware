@@ -32,6 +32,12 @@ Consequence: every forecast response carries source attribution fields;
 ingest is isolated behind a small provider module per source so a source
 swap never touches scoring.
 
+Amendment (2026-10-08, v1): BMKG `pelabuhan` port forecasts turned out to
+carry hourly `tides` in meters, so v1 tides come from BMKG alone — each
+`Surf Spot` maps to its nearest port via `bmkg_port_code` (Gilimanuk,
+Padangbai, Benoa, Sanur, Nusa Penida, Kusamba...). The tide atlas stays in
+the back pocket for regions BMKG doesn't cover.
+
 ## ADR-003: Cam model — link-first directory, consent-gated embeds — accepted (2026-10-08)
 
 Context: Surfline's moat is its cam network. We cannot hot-embed other
@@ -60,3 +66,21 @@ degradation.
 
 Consequence: anything needing identity (community reports, alerts) is
 explicitly out of v1 and will need a fresh privacy decision.
+
+## ADR-005: LLM-generated report is optional, endpoint-agnostic, staleness-gated — accepted (2026-10-08)
+
+Context: a good forecast page wants 2–4 sentences of human text plus a
+forecast-quality read ("do the sources agree"). Writing rules for that
+produces robotic copy; an LLM does it well — but must not become a hard
+dependency or a tracking channel.
+
+Decision: `opensurf/report.py` calls one OpenAI-compatible chat-completions
+endpoint per spot per (max 6h-stale) day. Endpoint, model and key come from
+`Open Surf Settings` or site config/env — any compatible provider works
+(OpenAI, Z.AI/GLM, self-hosted vLLM...). The model receives only forecast
+numbers — no user data exists to send. Output is stored inside the forecast
+snapshot (`report` key) with model name and generation time.
+
+Consequence: unconfigured → pages just show no report box; failures log and
+never break ingest. Cost stays flat (~1 call per spot per 6h at most). The
+"small text" feature degrades to numbers-only gracefully.

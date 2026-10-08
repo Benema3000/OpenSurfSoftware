@@ -1,7 +1,9 @@
 app_name = "opensurf"
 app_title = "Open Surf Software"
 app_publisher = "Benema3000"
-app_description = "Free, privacy-respecting surf forecasts and surf cams. Bali first, no tracking, no accounts, no ads."
+app_description = (
+	"Free, privacy-respecting surf forecasts and surf cams. Bali first, no tracking, no accounts, no ads."
+)
 app_email = "benedikt@goodvanta.ge"
 app_license = "agpl-3.0"
 
@@ -96,7 +98,7 @@ app_license = "agpl-3.0"
 # ------------
 
 # before_install = "opensurf.install.before_install"
-# after_install = "opensurf.install.after_install"
+after_install = "opensurf.seed.run"
 
 # Uninstallation
 # ------------
@@ -165,23 +167,11 @@ app_license = "agpl-3.0"
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"opensurf.tasks.all"
-# 	],
-# 	"daily": [
-# 		"opensurf.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"opensurf.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"opensurf.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"opensurf.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+	"hourly": [
+		"opensurf.ingest.refresh_all",
+	],
+}
 
 # Testing
 # -------
@@ -271,4 +261,3 @@ app_license = "agpl-3.0"
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
-

@@ -1,0 +1,32 @@
+{% extends "templates/web.html" %}
+{% block head_include %}{{ super() }}<link rel="stylesheet" href="/opensurf.css">{% endblock %}
+{% block page_content %}
+<div class="opensurf container py-4">
+	<h1>Surf forecast — Bali</h1>
+	<p class="muted">Free, no tracking, no accounts. Forecast data: Open-Meteo (CC BY 4.0) and BMKG.</p>
+
+	{% if best %}
+	<div class="best-banner">
+		Today's pick: <strong>{{ best.spot_name }}</strong> ({{ best.region }}) —
+		day score <span class="score {{ 'score-good' if best.today >= 7 else 'score-ok' }}">{{ best.today }}</span>
+		&mdash; <a href="/spot?spot={{ best.slug }}">check the forecast</a>
+	</div>
+	{% endif %}
+
+	<div class="spot-grid">
+		{% for s in spots %}
+		<a class="spot-card" href="/spot?spot={{ s.slug }}">
+			<div class="name">{{ s.spot_name }}
+				<span class="score {{ 'score-good' if (s.today or 0) >= 7 else 'score-ok' if (s.today or 0) >= 4 else 'score-poor' if s.today is not none else 'score-none' }}">{{ s.today if s.today is not none else '—' }}</span>
+			</div>
+			<div class="meta">{{ s.region }} · {{ s.wave_direction or '' }} {{ s.break_type or '' }}{{ ' · ' ~ s.experience_level if s.experience_level }}</div>
+		</a>
+		{% endfor %}
+	</div>
+
+	<p class="attr">
+		Forecasts are model data, not lifeguards — check the cams, know the reef.
+		Sources: Open-Meteo (CC BY 4.0), BMKG maritime forecasts. <a href="/cams">Surf cams</a>.
+	</p>
+</div>
+{% endblock %}

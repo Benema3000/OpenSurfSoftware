@@ -1,0 +1,96 @@
+{% extends "templates/web.html" %}
+{% block head_include %}{{ super() }}<link rel="stylesheet" href="/opensurf.css">{% endblock %}
+{% block page_content %}
+<div class="opensurf container py-4">
+	<p><a href="/spots">&larr; all spots</a> · <a href="/cams">cams</a></p>
+	<h1>{{ spot.spot_name }}</h1>
+	<p class="muted">
+		{{ spot.region }} · {{ spot.wave_direction or "–" }} {{ (spot.break_type or "")|lower }}
+		{{ "· " + spot.experience_level if spot.experience_level }}
+		{{ "· typically " + (spot.typical_crowd|lower) + " crowd" if spot.typical_crowd }}
+	</p>
+	{% if spot.description %}<p>{{ spot.description }}</p>{% endif %}
+	{% if spot.hazards %}<p class="muted"><strong>Hazards:</strong> {{ spot.hazards }}</p>{% endif %}
+
+	{% if report and report.text %}
+	<div class="report-box">
+		<div>{{ report.text }}</div>
+		{% if report.confidence %}
+		<div class="muted">Forecast confidence: {{ report.confidence }}{{ " — " + report.confidence_note if report.confidence_note }} · {{ report.date }}</div>
+		{% endif %}
+	</div>
+	{% endif %}
+
+	<div class="day-nav">
+		{% for d in days %}
+		<a href="/spot?spot={{ spot.slug }}&day={{ d.day }}" class="{{ 'active' if d.day == active_day }}">
+			{{ d.label }} <span class="score {{ 'score-good' if (d.score or 0) >= 7 else 'score-ok' if (d.score or 0) >= 4 else 'score-poor' if d.score is not none else 'score-none' }}">{{ d.score if d.score is not none else '—' }}</span>
+		</a>
+		{% endfor %}
+	</div>
+
+	{% if day_score is not none %}
+	<p>Day score <span class="score {{ 'score-good' if day_score >= 7 else 'score-ok' if day_score >= 4 else 'score-poor' }}">{{ day_score }}</span>
+	{% if best_hours %} — best window {{ best_hours[0].time[11:16] }}{% if best_hours|length > 1 %}, {{ best_hours[1].time[11:16] }}{% endif %}{% endif %}</p>
+	{% endif %}
+
+	{{ tide_svg }}
+
+	{% if hours %}
+	<table class="hours">
+		<thead><tr><th>Local</th><th>Score</th><th>Swell</th><th>Period</th><th>2nd swell</th><th>Wind</th><th>Gust</th><th>Tide</th></tr></thead>
+		<tbody>
+		{% for h in hours %}
+		<tr class="{{ 'daylight' if 6 <= h.time[11:13]|int <= 18 }}">
+			<td>{{ h.time[11:16] }}</td>
+			<td><span class="score {{ helpers.score_class(h.get('score')) }}">{{ h.get('score') if h.get('score') is not none else '—' }}</span></td>
+			<td>{{ '%.1f'|format(h.get('swell_height')) + ' m' if h.get('swell_height') is not none else '–' }} {{ helpers.deg_arrow(h.get('swell_dir')) }} {{ helpers.deg_compass(h.get('swell_dir')) }}</td>
+			<td>{{ (h.get('swell_period')|round) ~ ' s' if h.get('swell_period') is not none else '–' }}</td>
+			<td>{{ '%.1f'|format(h.get('swell2_height')) + ' m' if h.get('swell2_height') is not none else '–' }} {{ helpers.deg_compass(h.get('swell2_dir')) }}</td>
+			<td>{{ (h.get('wind_speed')|round) ~ ' kn' if h.get('wind_speed') is not none else '–' }} {{ helpers.deg_arrow(h.get('wind_dir')) }} {{ helpers.deg_compass(h.get('wind_dir')) }}</td>
+			<td>{{ (h.get('wind_gust')|round) ~ ' kn' if h.get('wind_gust') is not none else '–' }}</td>
+			<td>{{ ((h.get('tide_level') * 100)|round|int) ~ '%' if h.get('tide_level') is not none else '–' }}{{ ' ↑' if (h.get('tide_trend') or 0) > 0.01 }}{{ ' ↓' if (h.get('tide_trend') or 0) < -0.01 }}</td>
+		</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+	{% else %}
+	<p class="muted">No forecast cached yet — the ingest job runs hourly.</p>
+	{% endif %}
+
+	{% if cams %}
+	<h2 style="font-size:1.1rem;margin-top:1.5rem">Cams</h2>
+	<ul class="cam-list">
+		{% for c in cams %}
+		<li>
+			{% if c.stream_type == "YouTube" and c.get('youtube_id') %}
+			<button class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/{{ c.get('youtube_id') }}/hqdefault.jpg')"
+				data-yt="{{ c.get('youtube_id') }}"><span>▶ {{ c.cam_name }} — click to load (YouTube)</span></button>
+			{% else %}
+			<a href="{{ c.url }}" target="_blank" rel="noopener noreferrer">📷 {{ c.cam_name }}</a>
+			<span class="badge badge-link">{{ c.provider or 'external' }}</span>
+			{% endif %}
+		</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+
+	<p class="attr">
+		{% if fetched_at %}Forecast fetched {{ fetched_at }} · {% endif %}
+		Sources: Open-Meteo (CC BY 4.0){% if bmkg_area and bmkg_area.name %} · Sumber: BMKG — {{ bmkg_area.name }}, issued {{ bmkg_area.issued }}{% endif %}.
+		Score is model data, not a lifeguard — look at the water.
+	</p>
+</div>
+
+<script>
+document.querySelectorAll('.yt-facade').forEach(function (btn) {
+	btn.addEventListener('click', function () {
+		var iframe = document.createElement('iframe');
+		iframe.src = 'https://www.youtube-nocookie.com/embed/' + btn.dataset.yt + '?autoplay=1';
+		iframe.style.cssText = 'width:100%;aspect-ratio:16/9;border:0;border-radius:8px';
+		iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
+		btn.replaceWith(iframe);
+	});
+});
+</script>
+{% endblock %}

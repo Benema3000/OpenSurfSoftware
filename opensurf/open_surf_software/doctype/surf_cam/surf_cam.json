@@ -1,0 +1,134 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "field:cam_name",
+	"creation": "2026-10-08 00:00:00.000000",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"cam_name",
+		"spot",
+		"is_active",
+		"stream_type",
+		"provider",
+		"url",
+		"embed_section",
+		"consent",
+		"embed_url",
+		"youtube_id",
+		"notes"
+	],
+	"fields": [
+		{
+			"fieldname": "cam_name",
+			"fieldtype": "Data",
+			"in_list_view": 1,
+			"label": "Cam Name",
+			"reqd": 1,
+			"unique": 1
+		},
+		{
+			"fieldname": "spot",
+			"fieldtype": "Link",
+			"in_list_view": 1,
+			"in_standard_filter": 1,
+			"label": "Spot",
+			"options": "Surf Spot",
+			"reqd": 1
+		},
+		{
+			"default": "1",
+			"fieldname": "is_active",
+			"fieldtype": "Check",
+			"in_standard_filter": 1,
+			"label": "Active"
+		},
+		{
+			"default": "Link",
+			"fieldname": "stream_type",
+			"fieldtype": "Select",
+			"in_list_view": 1,
+			"in_standard_filter": 1,
+			"label": "Stream Type",
+			"options": "Link\nYouTube\nHLS\nWebRTC",
+			"reqd": 1
+		},
+		{
+			"description": "Who operates the camera, e.g. \"The Bali Eye\", \"LiveSurf\", a beach bar name.",
+			"fieldname": "provider",
+			"fieldtype": "Data",
+			"label": "Provider"
+		},
+		{
+			"description": "External watch page or stream URL. Always shown as a link regardless of consent.",
+			"fieldname": "url",
+			"fieldtype": "Data",
+			"label": "URL",
+			"reqd": 1
+		},
+		{
+			"fieldname": "embed_section",
+			"fieldtype": "Section Break",
+			"label": "Embedding"
+		},
+		{
+			"default": "Link Only",
+			"description": "Embedding is only enabled when the operator consented (Embed Granted). Link Only still shows the cam as an external link.",
+			"fieldname": "consent",
+			"fieldtype": "Select",
+			"in_list_view": 1,
+			"in_standard_filter": 1,
+			"label": "Consent",
+			"options": "Link Only\nRequested\nEmbed Granted\nEmbed Declined",
+			"reqd": 1
+		},
+		{
+			"description": "Direct embed URL for HLS (.m3u8), WebRTC (WHEP) or iframe sources. Only used with Embed Granted consent.",
+			"fieldname": "embed_url",
+			"fieldtype": "Data",
+			"label": "Embed URL"
+		},
+		{
+			"depends_on": "eval:doc.stream_type===\"YouTube\"",
+			"description": "YouTube video/stream id, embedded via youtube-nocookie.com behind a click-to-load facade.",
+			"fieldname": "youtube_id",
+			"fieldtype": "Data",
+			"label": "YouTube ID"
+		},
+		{
+			"fieldname": "notes",
+			"fieldtype": "Small Text",
+			"label": "Notes"
+		}
+	],
+	"index_web_pages_for_search": 0,
+	"links": [],
+	"modified": "2026-10-08 00:00:00.000000",
+	"modified_by": "Administrator",
+	"module": "Open Surf Software",
+	"name": "Surf Cam",
+	"naming_rule": "By fieldname",
+	"owner": "Administrator",
+	"permissions": [
+		{
+			"create": 1,
+			"delete": 1,
+			"email": 1,
+			"export": 1,
+			"print": 1,
+			"read": 1,
+			"report": 1,
+			"role": "System Manager",
+			"share": 1,
+			"write": 1
+		},
+		{
+			"read": 1,
+			"role": "Guest"
+		}
+	],
+	"sort_field": "modified",
+	"sort_order": "DESC",
+	"states": [],
+	"track_changes": 1
+}

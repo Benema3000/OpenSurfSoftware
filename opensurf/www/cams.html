@@ -1,0 +1,43 @@
+{% extends "templates/web.html" %}
+{% block head_include %}{{ super() }}<link rel="stylesheet" href="/opensurf.css">{% endblock %}
+{% block page_content %}
+<div class="opensurf container py-4">
+	<p><a href="/spots">&larr; spots</a></p>
+	<h1>Surf cams — Bali</h1>
+	<p class="muted">
+		Every cam is linked at its operator's own page — embeds appear only where the
+		operator has consented. Know a cam we missed? <a href="https://github.com/Benema3000/OpenSurfSoftware/issues">Tell us</a>.
+	</p>
+
+	{% for spot, cams in by_spot %}
+	<h2 style="font-size:1.05rem;margin-top:1.2rem"><a href="/spot?spot={{ spot }}">{{ spot }}</a></h2>
+	<ul class="cam-list">
+		{% for c in cams %}
+		<li>
+			{% if c.stream_type == "YouTube" and c.get('youtube_id') %}
+			<button class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/{{ c.get('youtube_id') }}/hqdefault.jpg')"
+				data-yt="{{ c.get('youtube_id') }}"><span>▶ {{ c.cam_name }} — click to load (YouTube)</span></button>
+			{% else %}
+			<a href="{{ c.url }}" target="_blank" rel="noopener noreferrer">📷 {{ c.cam_name }}</a>
+			<span class="badge badge-link">{{ c.provider or 'external' }}</span>
+			{% endif %}
+		</li>
+		{% endfor %}
+	</ul>
+	{% endfor %}
+
+	<p class="attr">Embeds, when consented, load only on click — nothing phones home until you press play.</p>
+</div>
+
+<script>
+document.querySelectorAll('.yt-facade').forEach(function (btn) {
+	btn.addEventListener('click', function () {
+		var iframe = document.createElement('iframe');
+		iframe.src = 'https://www.youtube-nocookie.com/embed/' + btn.dataset.yt + '?autoplay=1';
+		iframe.style.cssText = 'width:100%;aspect-ratio:16/9;border:0;border-radius:8px';
+		iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
+		btn.replaceWith(iframe);
+	});
+});
+</script>
+{% endblock %}
