@@ -23,7 +23,7 @@
 
 	<div class="day-nav">
 		{% for d in days %}
-		<a href="/spot?spot={{ spot.slug }}&day={{ d.day }}" class="{{ 'active' if d.day == active_day }}">
+		<a href="/spot?spot={{ spot.slug | e }}&day={{ d.day | e }}" class="{{ ('active' if d.day == active_day) | e }}">
 			{{ d.label }} <span class="score {{ 'score-good' if (d.score or 0) >= 7 else 'score-ok' if (d.score or 0) >= 4 else 'score-poor' if d.score is not none else 'score-none' }}">{{ d.score if d.score is not none else '—' }}</span>
 		</a>
 		{% endfor %}
@@ -41,7 +41,7 @@
 		<thead><tr><th>Local</th><th>Score</th><th>Swell</th><th>Period</th><th>2nd swell</th><th>Wind</th><th>Gust</th><th>Tide</th></tr></thead>
 		<tbody>
 		{% for h in hours %}
-		<tr class="{{ 'daylight' if 6 <= h.time[11:13]|int <= 18 }}">
+		<tr class="{{ ('daylight' if 6 <= h.time[11:13]|int <= 18) | e }}">
 			<td>{{ h.time[11:16] }}</td>
 			<td><span class="score {{ helpers.score_class(h.get('score')) }}">{{ h.get('score') if h.get('score') is not none else '—' }}</span></td>
 			<td>{{ '%.1f'|format(h.get('swell_height')) + ' m' if h.get('swell_height') is not none else '–' }} {{ helpers.deg_arrow(h.get('swell_dir')) }} {{ helpers.deg_compass(h.get('swell_dir')) }}</td>
@@ -64,10 +64,10 @@
 		{% for c in cams %}
 		<li>
 			{% if c.stream_type == "YouTube" and c.get('youtube_id') %}
-			<button class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/{{ c.get('youtube_id') }}/hqdefault.jpg')"
-				data-yt="{{ c.get('youtube_id') }}"><span>▶ {{ c.cam_name }} — click to load (YouTube)</span></button>
+			<button class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/{{ c.get('youtube_id') | e }}/hqdefault.jpg')"
+				data-yt="{{ c.get('youtube_id') | e }}"><span>▶ {{ c.cam_name }} — click to load (YouTube)</span></button>
 			{% else %}
-			<a href="{{ c.url }}" target="_blank" rel="noopener noreferrer">📷 {{ c.cam_name }}</a>
+			<a href="{{ c.url | e }}" target="_blank" rel="noopener noreferrer">📷 {{ c.cam_name }}</a>
 			<span class="badge badge-link">{{ c.provider or 'external' }}</span>
 			{% endif %}
 		</li>
